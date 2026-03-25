@@ -37,6 +37,9 @@ export default defineConfig({
     },
   },
 
+  // Base public path for GitHub Pages (must match repo name)
+  base: '/catholics-sg-homepage/',
+
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv', '**/*.mp4'],
 })

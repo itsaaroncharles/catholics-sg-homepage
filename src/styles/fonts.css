@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@400;700&family=Fira+Sans:wght@400;500;600;700&display=swap');
+
+/*
+ * Figma Make exports font-family names in "Family:Weight" format (e.g. "Fira Sans:Bold").
+ * Browsers don't know these names, so we register @font-face aliases that map each
+ * Figma-style name back to the real font files on Google's CDN.
+ */
+
+/* Fira Sans:Regular  (400) */
+@font-face {
+  font-family: 'Fira Sans:Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/firasans/v18/va9E4kDNxMZdWfMOD5Vvl4jLazX3dA.woff2) format('woff2');
+}
+
+/* Fira Sans:Medium  (500) */
+@font-face {
+  font-family: 'Fira Sans:Medium';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/firasans/v18/va9B4kDNxMZdWfMOD5VnZKveRhf6Xl7Glw.woff2) format('woff2');
+}
+
+/* Fira Sans:SemiBold  (600) */
+@font-face {
+  font-family: 'Fira Sans:SemiBold';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/firasans/v18/va9B4kDNxMZdWfMOD5VnSKzeRhf6Xl7Glw.woff2) format('woff2');
+}
+
+/* Fira Sans:Bold  (700) */
+@font-face {
+  font-family: 'Fira Sans:Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/firasans/v18/va9B4kDNxMZdWfMOD5VnLK3eRhf6Xl7Glw.woff2) format('woff2');
+}
+
+/* Fira Sans Condensed:Regular  (400) */
+@font-face {
+  font-family: 'Fira Sans Condensed:Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/firasanscondensed/v11/wEOhEADFm8hSaQTFG18FErVhsC9x-tarUfbtrelWfx4.woff2) format('woff2');
+}
+
+/* Fira Sans Condensed:Bold  (700) */
+@font-face {
+  font-family: 'Fira Sans Condensed:Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/firasanscondensed/v11/wEOsEADFm8hSaQTFG18FErVhsC9x-tarWU3IuMR0cjRYhY8.woff2) format('woff2');
+}

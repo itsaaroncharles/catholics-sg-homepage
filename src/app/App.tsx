@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import svgPaths from '../imports/svg-p881keacq0';
 import VideoGenerationConfirmation from '../imports/VideoGenerationConfirmation1';
+import ProfilePage from './ProfilePage';
 import imgImage59 from "../assets/Daily Reading.svg";
 import imgImage3 from "../assets/Daily rosary.svg";
 import imgImage4 from "../assets/AI Spiritual partner.svg";
@@ -116,7 +117,9 @@ function AnimatedSearchButton() {
 }
 
 // Bottom Navigation
-function BottomNav() {
+type Tab = 'home' | 'community' | 'resources' | 'me';
+
+function BottomNav({ activeTab, onTabChange }: { activeTab: Tab; onTabChange: (tab: Tab) => void }) {
   return (
     <motion.div 
       className="fixed bottom-8 left-1/2 z-50"
@@ -134,7 +137,7 @@ function BottomNav() {
       >
         <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
           {/* Home */}
-          <div className="content-stretch flex flex-col gap-[6px] items-center px-[16px] relative shrink-0">
+          <button onClick={() => onTabChange('home')} className={`content-stretch cursor-pointer flex flex-col gap-[6px] items-center px-[16px] relative shrink-0 ${activeTab !== 'home' ? 'opacity-60' : ''}`}>
             <div className="overflow-clip relative shrink-0 size-[24px]">
               <div className="absolute inset-[4.17%_8.33%_8.33%_8.33%]">
                 <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 21">
@@ -143,10 +146,10 @@ function BottomNav() {
               </div>
             </div>
             <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[12px] text-white">Home</p>
-          </div>
+          </button>
 
           {/* Community */}
-          <div className="content-stretch flex flex-col gap-[6px] items-center opacity-60 px-[16px] relative shrink-0">
+          <button onClick={() => onTabChange('community')} className={`content-stretch cursor-pointer flex flex-col gap-[6px] items-center px-[16px] relative shrink-0 ${activeTab !== 'community' ? 'opacity-60' : ''}`}>
             <div className="overflow-clip relative shrink-0 size-[24px]">
               <div className="absolute inset-[8.33%_4.17%_8.44%_4.17%]">
                 <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 22 19.9748">
@@ -158,10 +161,10 @@ function BottomNav() {
               </div>
             </div>
             <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[12px] text-white">Community</p>
-          </div>
+          </button>
 
           {/* Resources */}
-          <div className="content-stretch flex flex-col gap-[6px] items-center opacity-60 px-[16px] relative shrink-0">
+          <button onClick={() => onTabChange('resources')} className={`content-stretch cursor-pointer flex flex-col gap-[6px] items-center px-[16px] relative shrink-0 ${activeTab !== 'resources' ? 'opacity-60' : ''}`}>
             <div className="overflow-clip relative shrink-0 size-[24px]">
               <div className="absolute inset-[2.08%_8.33%_4.17%_8.33%]">
                 <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 22.5">
@@ -173,10 +176,10 @@ function BottomNav() {
               </div>
             </div>
             <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[12px] text-white">Resources</p>
-          </div>
+          </button>
 
           {/* Me */}
-          <div className="content-stretch flex flex-col gap-[6px] items-center opacity-60 px-[16px] relative shrink-0">
+          <button onClick={() => onTabChange('me')} className={`content-stretch cursor-pointer flex flex-col gap-[6px] items-center px-[16px] relative shrink-0 ${activeTab !== 'me' ? 'opacity-60' : ''}`}>
             <div className="relative shrink-0 size-[24px]">
               <div className="absolute inset-[4.17%_8.33%]">
                 <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 22">
@@ -188,7 +191,7 @@ function BottomNav() {
               </div>
             </div>
             <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[12px] text-white">Me</p>
-          </div>
+          </button>
         </div>
       </div>
     </motion.div>
@@ -197,6 +200,7 @@ function BottomNav() {
 
 
 export default function App() {
+  const [activeTab, setActiveTab] = useState<Tab>('home');
   const [verseIndex, setVerseIndex] = useState(0);
   const verses = [
     { text: "I am the way, the truth and the life.", reference: "- John 14:6" },
@@ -222,6 +226,11 @@ export default function App() {
           display: none;
         }
       `}</style>
+
+      {activeTab === 'me' ? (
+        <ProfilePage />
+      ) : (
+      <>
       {/* Hero Section */}
       <div className="relative h-[363px] mb-[-24px]">
         <div className="absolute h-[363px] left-0 top-0 w-full overflow-clip">
@@ -276,7 +285,7 @@ export default function App() {
       <div className="flex flex-col gap-[24px] p-[16px] pb-[120px]">
         {/* Explore Section */}
         <div className="flex flex-col gap-[16px] pt-[16px]">
-          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[20px]">Explore</p>
+          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Explore</p>
 
           <div className="grid grid-cols-4 gap-[8px]">
             {/* Daily Reading */}
@@ -347,7 +356,7 @@ export default function App() {
 
         {/* Scripture Reflections */}
         <div className="flex flex-col gap-[16px]">
-          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[20px]">Scripture reflections</p>
+          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Scripture reflections</p>
           
           <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
             <div className="flex flex-col gap-[10px] h-[240px] justify-end overflow-clip pb-[16px] px-[16px] relative rounded-[16px] shrink-0 w-[160px]">
@@ -389,7 +398,7 @@ export default function App() {
 
         {/* Community Section */}
         <div className="flex flex-col gap-[16px]">
-          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[20px]">Community</p>
+          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Community</p>
           
           <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
             {/* Prayer Request Card */}
@@ -416,8 +425,10 @@ export default function App() {
           </div>
         </div>
       </div>
+      </>
+      )}
 
-      <BottomNav />
+      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
     </div>
   );
 }

@@ -1,6 +1,9 @@
 import profileHeroImg from "../assets/Profile.svg";
 import ringImg from "../assets/Ring.svg";
 import cardBgImg from "../assets/card-BG.svg";
+import familySammy from "../assets/family-sammy.png";
+import familyAriana from "../assets/family-ariana.png";
+import familyJonathan from "../assets/family-jonathan.png";
 
 // Chevron Right Icon
 function ChevronRight() {
@@ -74,44 +77,68 @@ function SacramentCard() {
   );
 }
 
+// Family Member Card
+function FamilyMemberCard({ name, role, imgSrc }: { name: string; role: string; imgSrc: string }) {
+  return (
+    <div className="flex flex-1 flex-col items-center min-w-0">
+      <div className="bg-white h-[100px] min-w-[80px] overflow-hidden relative rounded-tl-[16px] rounded-tr-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_3.441px_6.882px_0px_rgba(208,185,133,0.15)] w-full">
+        <img alt={name} className="absolute inset-0 h-full w-full object-cover" src={imgSrc} />
+      </div>
+      <div className="bg-white flex flex-col gap-[8px] items-center min-w-[80px] p-[12px] rounded-bl-[16px] rounded-br-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_3.441px_6.882px_0px_rgba(208,185,133,0.15)] text-[#041a52] text-center w-full">
+        <p className="font-['Fira_Sans:Bold',sans-serif] leading-[16px] text-[14px]">{name}</p>
+        <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[12px]">{role}</p>
+      </div>
+    </div>
+  );
+}
+
 export default function ProfilePage() {
   return (
     <div className="flex flex-col items-start pb-[108px] relative size-full">
-      {/* Profile Hero */}
-      <div className="flex flex-col gap-[10px] h-[400px] items-center justify-end overflow-clip px-[25px] py-[24px] relative shrink-0 w-full">
-        {/* Background image */}
-        <div className="absolute inset-0">
+      {/* Profile Hero — matches homepage curve pattern */}
+      <div className="relative h-[363px] mb-[-24px] w-full shrink-0">
+        <div className="absolute h-[363px] left-0 top-0 w-full overflow-clip">
+          {/* Background image */}
           <img
             alt=""
             className="w-full h-full object-cover"
             src={profileHeroImg}
           />
-          {/* Gradient overlay */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%)',
-            }}
-          />
-        </div>
 
-        {/* Name and parish */}
-        <div className="flex flex-col items-center relative z-10">
-          <div className="flex flex-col gap-[8px] items-center not-italic whitespace-nowrap">
-            <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[28px] text-white tracking-[0.1105px]">
-              Aaron Charles Gabriel
+          {/* Name and parish */}
+          <div className="absolute bottom-[48px] left-[16px] flex flex-col gap-[8px] items-start">
+            <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[24px] text-white tracking-[0.1105px]">
+              Aaron Gabriel
             </p>
-            <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#e2e2e2] text-[16px] text-center tracking-[0.043px]">
+            <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#e2e2e2] text-[14px] tracking-[0.043px]">
               Our Lady of Perpetual Succour
             </p>
           </div>
         </div>
       </div>
 
+      {/* Sacrament Card Section — replaces search bar, curved top like homepage */}
+      <div className="bg-[#fffcf5] relative rounded-tl-[16px] rounded-tr-[16px] z-10">
+        <div className="overflow-clip rounded-[inherit] w-full">
+          <div className="flex flex-col items-start px-[16px] pt-[16px]">
+            <SacramentCard />
+          </div>
+        </div>
+      </div>
+
       {/* Content */}
-      <div className="flex flex-col gap-[40px] items-start p-[16px] w-full">
-        {/* Sacrament Card */}
-        <SacramentCard />
+      <div className="flex flex-col gap-[40px] items-start px-[16px] pt-[16px] w-full">
+        {/* Your Family Section */}
+        <div className="flex flex-col gap-[16px] items-start w-full">
+          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] not-italic text-[#041a52] text-[18px] w-full">
+            Your family
+          </p>
+          <div className="flex gap-[8px] items-start w-full">
+            <FamilyMemberCard name="Sammy" role="Wife" imgSrc={familySammy} />
+            <FamilyMemberCard name="Ariana" role="Daughter" imgSrc={familyAriana} />
+            <FamilyMemberCard name="Jonathan" role="Son" imgSrc={familyJonathan} />
+          </div>
+        </div>
 
         {/* Profile Section */}
         <div className="flex flex-col gap-[16px] items-start w-full">

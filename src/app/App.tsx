@@ -273,16 +273,64 @@ export default function App() {
       </div>
 
       {/* Search Section */}
-      <div className="bg-[#fffcf5] mb-[-24px] relative rounded-tl-[16px] rounded-tr-[16px] z-10">
+      <div className="bg-[#fffcf5] relative rounded-tl-[16px] rounded-tr-[16px] z-10">
         <div className="overflow-clip rounded-[inherit] w-full">
-          <div className="flex flex-col items-start p-[16px] pb-[8px]">
+          <div className="flex flex-col items-start px-[16px] pt-[16px]">
             <AnimatedSearchButton />
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col gap-[24px] p-[16px] pb-[120px]">
+      <div className="flex flex-col gap-[16px] px-[16px] pt-[16px] pb-[120px]">
+        {/* Announcements Swimlane */}
+        <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
+          {/* Card 1: Holy Land tour */}
+          <div className="bg-white flex gap-[12px] items-start overflow-hidden p-[12px] rounded-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 w-[280px]">
+            <div className="overflow-hidden relative rounded-[8px] self-stretch shrink-0 w-[80px]">
+              <img
+                alt="Holy Land panorama"
+                className="absolute inset-0 h-full w-full object-cover"
+                src="https://www.figma.com/api/mcp/asset/22c67a32-eebc-4b8e-9486-5aecc7966bb7"
+              />
+            </div>
+            <div className="flex flex-1 flex-col gap-[16px] items-start min-w-0">
+              <div className="flex flex-col gap-[8px] items-start w-full">
+                <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[#43537b] text-[16px] tracking-[0.11px]">
+                  Holy Land tour schedule is available
+                </p>
+                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px] line-clamp-2">
+                  Join our parish pilgrimage to the Holy Land in 2026. View the full itinerary and registration details now.
+                </p>
+              </div>
+              <div className="bg-[#fbf1ee] px-[12px] py-[4px] rounded-[4px] shrink-0">
+                <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#84160e] text-[12px] whitespace-nowrap">
+                  Church Announcement
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Catechist needed */}
+          <div className="bg-white flex gap-[12px] items-start overflow-hidden p-[12px] rounded-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 w-[280px]">
+            <div className="flex flex-1 flex-col gap-[16px] items-start min-w-0">
+              <div className="flex flex-col gap-[8px] items-start w-full">
+                <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[#43537b] text-[16px] tracking-[0.11px]">
+                  Catechist needed for 2026
+                </p>
+                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px] line-clamp-3">
+                  We are looking for dedicated volunteers to serve as catechists in 2026. Training and guidance will be provided. Come journey with our youth in faith.
+                </p>
+              </div>
+              <div className="bg-[#f2eefb] px-[12px] py-[4px] rounded-[4px] shrink-0">
+                <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#2a0e84] text-[12px] whitespace-nowrap">
+                  Parish Announcement
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Explore Section */}
         <div className="flex flex-col gap-[16px] pt-[16px]">
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Explore</p>

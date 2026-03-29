@@ -284,7 +284,7 @@ export default function App() {
       {/* Main Content */}
       <div className="flex flex-col gap-[16px] px-[16px] pt-[16px] pb-[120px]">
         {/* Announcements Swimlane */}
-        <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
+        <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] py-[8px] -my-[8px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
           {/* Card 1: Holy Land tour */}
           <div className="bg-white flex gap-[12px] items-start overflow-hidden p-[12px] rounded-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 w-[280px]">
             <div className="overflow-hidden relative rounded-[8px] self-stretch shrink-0 w-[80px]">
@@ -406,7 +406,7 @@ export default function App() {
         <div className="flex flex-col gap-[16px]">
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Scripture reflections</p>
           
-          <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
+          <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] py-[8px] -my-[8px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
             <div className="flex flex-col gap-[10px] h-[240px] justify-end overflow-clip pb-[16px] px-[16px] relative rounded-[16px] shrink-0 w-[160px]">
               <div className="absolute inset-0">
                 <img alt="" className="w-full h-full object-cover" src={imgImage11} />
@@ -448,7 +448,7 @@ export default function App() {
         <div className="flex flex-col gap-[16px]">
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Community</p>
           
-          <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
+          <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] py-[8px] -my-[8px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
             {/* Prayer Request Card */}
             <div className="bg-white flex flex-col gap-[12px] pb-[16px] pt-[12px] px-[16px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)] shrink-0 w-[244px]">
               <div className="bg-[#faf0cc] px-[12px] py-[4px] rounded-[4px] self-start">

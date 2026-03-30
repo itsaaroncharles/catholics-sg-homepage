@@ -201,6 +201,7 @@ function BottomNav({ activeTab, onTabChange }: { activeTab: Tab; onTabChange: (t
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
+  const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [verseIndex, setVerseIndex] = useState(0);
   const verses = [
     { text: "I am the way, the truth and the life.", reference: "- John 14:6" },
@@ -228,7 +229,7 @@ export default function App() {
       `}</style>
 
       {activeTab === 'me' ? (
-        <ProfilePage />
+        <ProfilePage onBottomSheetChange={setBottomSheetOpen} />
       ) : (
       <>
       {/* Hero Section */}
@@ -476,7 +477,7 @@ export default function App() {
       </>
       )}
 
-      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+      {!bottomSheetOpen && <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />}
     </div>
   );
 }

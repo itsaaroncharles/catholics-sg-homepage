@@ -403,7 +403,7 @@ export default function App() {
         </div>
 
         {/* Scripture Reflections */}
-        <div className="flex flex-col gap-[16px]">
+        <div className="flex flex-col gap-[16px] pt-[16px]">
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Scripture reflections</p>
           
           <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] py-[8px] -my-[8px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
@@ -445,7 +445,7 @@ export default function App() {
         </div>
 
         {/* Community Section */}
-        <div className="flex flex-col gap-[16px]">
+        <div className="flex flex-col gap-[16px] pt-[16px]">
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Community</p>
           
           <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] py-[8px] -my-[8px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>

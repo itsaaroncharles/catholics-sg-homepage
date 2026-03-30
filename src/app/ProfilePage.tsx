@@ -1,9 +1,10 @@
-import profileHeroImg from "../assets/Profile.svg";
+import profileAvatarImg from "../assets/profile-avatar.png";
 import ringImg from "../assets/Ring.svg";
 import cardBgImg from "../assets/card-BG.svg";
 import familySammy from "../assets/family-sammy.png";
 import familyAriana from "../assets/family-ariana.png";
 import familyJonathan from "../assets/family-jonathan.png";
+import churchIcon from "../assets/church-icon.svg";
 
 // Chevron Right Icon
 function ChevronRight() {
@@ -95,24 +96,25 @@ function FamilyMemberCard({ name, role, imgSrc }: { name: string; role: string; 
 export default function ProfilePage() {
   return (
     <div className="flex flex-col items-start pb-[108px] relative size-full">
-      {/* Profile Hero — matches homepage curve pattern */}
-      <div className="relative h-[363px] mb-[-24px] w-full shrink-0">
-        <div className="absolute h-[363px] left-0 top-0 w-full overflow-clip">
-          {/* Background image */}
-          <img
-            alt=""
-            className="w-full h-full object-cover"
-            src={profileHeroImg}
-          />
-
-          {/* Name and parish */}
-          <div className="absolute bottom-[48px] left-[16px] flex flex-col gap-[8px] items-start">
-            <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[24px] text-white tracking-[0.1105px]">
+      {/* Profile Hero — compact purple bar with avatar */}
+      <div className="relative h-[140px] mb-[-24px] w-full shrink-0">
+        <div className="absolute inset-0 bg-[#BB0000]" />
+        <div className="absolute bottom-[48px] left-[16px] flex gap-[16px] items-center pt-[24px]">  
+          {/* Avatar */}
+          <div className="overflow-hidden rounded-[16px] shrink-0 size-[64px]">
+            <img alt="Aaron Gabriel" className="w-full h-full object-cover" src={profileAvatarImg} />
+          </div>
+          {/* Name + Parish */}
+          <div className="flex flex-col gap-[8px] items-start">
+            <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[24px] text-white tracking-[0.1105px] whitespace-nowrap">
               Aaron Gabriel
             </p>
-            <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#e2e2e2] text-[14px] tracking-[0.043px]">
-              Our Lady of Perpetual Succour
-            </p>
+            <div className="flex gap-[8px] items-center">
+              <img alt="" className="size-[16px] shrink-0" src={churchIcon} />
+              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#eaeaea] text-[14px] tracking-[0.043px] whitespace-nowrap">
+                Our Lady of Perpetual Succour
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -127,7 +129,7 @@ export default function ProfilePage() {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col gap-[40px] items-start px-[16px] pt-[16px] w-full">
+      <div className="flex flex-col gap-[32px] items-start px-[16px] pt-[16px] w-full">
         {/* Your Family Section */}
         <div className="flex flex-col gap-[16px] items-start w-full">
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] not-italic text-[#041a52] text-[18px] w-full">

@@ -308,11 +308,9 @@ export default function App() {
                   Join our parish pilgrimage to the Holy Land in 2026. View the full itinerary and registration details now.
                 </p>
               </div>
-              <div className="bg-[#fbf1ee] px-[12px] py-[4px] rounded-[4px] shrink-0">
-                <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#84160e] text-[12px] whitespace-nowrap">
-                  Church Announcement
-                </p>
-              </div>
+              <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#84160e] text-[12px] whitespace-nowrap">
+                Church Announcement
+              </p>
             </div>
           </div>
 
@@ -327,11 +325,9 @@ export default function App() {
                   We are looking for dedicated volunteers to serve as catechists in 2026. Training and guidance will be provided. Come journey with our youth in faith.
                 </p>
               </div>
-              <div className="bg-[#f2eefb] px-[12px] py-[4px] rounded-[4px] shrink-0">
-                <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#2a0e84] text-[12px] whitespace-nowrap">
-                  Parish Announcement
-                </p>
-              </div>
+              <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#2a0e84] text-[12px] whitespace-nowrap">
+                Parish Announcement
+              </p>
             </div>
           </div>
         </div>

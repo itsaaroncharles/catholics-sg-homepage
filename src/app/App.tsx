@@ -468,7 +468,7 @@ export default function App() {
       </>
       )}
 
-      {!bottomSheetOpen && <BottomNav activeTab={activeTab} onTabChange={setActiveTab} visible={navVisible} />}
+      {!bottomSheetOpen && <BottomNav activeTab={activeTab} onTabChange={(tab) => { setActiveTab(tab); window.scrollTo(0, 0); }} visible={navVisible} />}
     </div>
   );
 }

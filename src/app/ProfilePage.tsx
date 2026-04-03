@@ -4,7 +4,7 @@ import profileAvatarImg from "../assets/profile-avatar.png";
 import profileBgImg from "../assets/profile-bg.png";
 import ringImg from "../assets/Ring.svg";
 import cardBgImg from "../assets/card-BG.svg";
-import sacramentModalBgImg from "../assets/sacrament-modal-bg.svg";
+import sacramentModalBgImg from "../assets/sacrament-bg.png";
 import closeButtonImg from "../assets/Close-button.svg";
 import confirmationImg from "../assets/Confirmation.svg";
 import firstCommunionImg from "../assets/First Communion.svg";
@@ -70,7 +70,7 @@ function SacramentBottomSheet({ onClose }: { onClose: () => void }) {
         <div className="absolute top-[-42px] left-1/2 -translate-x-1/2 w-[449px] h-[299px] pointer-events-none">
           <img
             alt=""
-            className="w-full h-full object-cover -scale-y-100"
+            className="w-full h-full object-fill -scale-y-100"
             src={sacramentModalBgImg}
           />
         </div>
@@ -184,7 +184,7 @@ function SacramentsListBottomSheet({ onClose }: { onClose: () => void }) {
         <div className="absolute top-[-42px] left-1/2 -translate-x-1/2 w-[449px] h-[299px] pointer-events-none">
           <img
             alt=""
-            className="w-full h-full object-cover -scale-y-100"
+            className="w-full h-full object-fill -scale-y-100"
             src={sacramentModalBgImg}
           />
         </div>

@@ -123,12 +123,14 @@ function AnimatedSearchButton() {
 // Bottom Navigation
 type Tab = 'home' | 'community' | 'resources' | 'me';
 
-function BottomNav({ activeTab, onTabChange }: { activeTab: Tab; onTabChange: (tab: Tab) => void }) {
+function BottomNav({ activeTab, onTabChange, visible }: { activeTab: Tab; onTabChange: (tab: Tab) => void; visible: boolean }) {
   return (
     <motion.div 
       className="fixed bottom-8 left-1/2 z-50"
       initial={{ x: '-50%' }}
       style={{ x: '-50%' }}
+      animate={{ y: visible ? 0 : 100 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
       <div 
         className="content-stretch flex flex-col items-center p-[12px] rounded-[999px] shrink-0 w-[329px]"
@@ -207,11 +209,27 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [verseIndex, setVerseIndex] = useState(0);
+  const [navVisible, setNavVisible] = useState(true);
   const verses = [
     { text: "I am the way, the truth and the life.", reference: "- John 14:6" },
     { text: "Peace be with you, always.", reference: "- John 20:19" },
     { text: "Love one another as I have loved you.", reference: "- John 13:34" }
   ];
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        setNavVisible(false);
+      } else {
+        setNavVisible(true);
+      }
+      lastScrollY = currentScrollY;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -533,7 +551,7 @@ export default function App() {
       </>
       )}
 
-      {!bottomSheetOpen && <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />}
+      {!bottomSheetOpen && <BottomNav activeTab={activeTab} onTabChange={setActiveTab} visible={navVisible} />}
     </div>
   );
 }

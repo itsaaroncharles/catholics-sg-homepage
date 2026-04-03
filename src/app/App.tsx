@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import svgPaths from '../imports/svg-p881keacq0';
 import VideoGenerationConfirmation from '../imports/VideoGenerationConfirmation1';
 import ProfilePage from './ProfilePage';
+import CommunityPage from './CommunityPage';
 import imgImage59 from "../assets/Daily Reading.svg";
 import imgImage3 from "../assets/Daily rosary.svg";
 import imgImage4 from "../assets/AI Spiritual partner.svg";
@@ -14,10 +15,7 @@ import imgImage13 from "../assets/Fr Adrian.svg";
 import imgImage14 from "../assets/Fr Luke.svg";
 import imgMassSchedule from "../assets/Mass schedule.svg";
 import imgExploreMore from "../assets/Explore more.svg";
-import communityAvatarAaron from "../assets/community-avatar-aaron.png";
-import communityAvatarAnon from "../assets/community-avatar-anon.png";
-import articleIcon from "../assets/article-icon.svg";
-import videoIcon from "../assets/video-icon.svg";
+
 
 // Animated AI Icon Component
 function MingcuteAiFill() {
@@ -252,6 +250,8 @@ export default function App() {
 
       {activeTab === 'me' ? (
         <ProfilePage onBottomSheetChange={setBottomSheetOpen} />
+      ) : activeTab === 'community' ? (
+        <CommunityPage />
       ) : (
       <>
       {/* Hero Section */}
@@ -463,90 +463,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* Community Section */}
-        <div className="flex flex-col gap-[16px] pt-[16px]">
-          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Community</p>
-          
-          <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] py-[8px] -my-[8px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
-            {/* Prayer Request Card */}
-            <div className="bg-white flex flex-col gap-[12px] pb-[16px] pt-[12px] px-[16px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)] shrink-0 w-[280px]">
-              <div className="flex gap-[12px] items-center">
-                <div className="overflow-clip rounded-[10px] shrink-0 size-[40px]">
-                  <img alt="" className="size-full object-cover" src={communityAvatarAaron} />
-                </div>
-                <div className="flex flex-col gap-[4px]">
-                  <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[16px] text-black tracking-[0.1105px]">Aaron Gabriel</p>
-                  <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#b8891a] text-[12px]">Prayer request</p>
-                </div>
-              </div>
-              <div className="h-[68px] overflow-hidden">
-                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px]">
-                  Hi everyone, it has been really difficult these days navigating life. I feel empty. I feel lost. I feel like giving up. Every step i take feels heavy. Hi everyone, i...
-                </p>
-              </div>
-              <div className="flex gap-[8px] items-center">
-                <div className="flex gap-[4px] items-center">
-                  <img alt="" className="size-[16px]" src={articleIcon} />
-                  <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px]">1min read</p>
-                </div>
-                <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px]">•</p>
-                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[rgba(4,26,82,0.57)] text-[12px] tracking-[0.043px]">24 Mar 26</p>
-              </div>
-            </div>
 
-            {/* Testimonial Card */}
-            <div className="bg-white flex flex-col gap-[12px] pb-[16px] pt-[12px] px-[16px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)] shrink-0 w-[280px]">
-              <div className="flex gap-[12px] items-center">
-                <div className="overflow-clip rounded-[10px] shrink-0 size-[40px]">
-                  <img alt="" className="size-full object-cover" src={communityAvatarAnon} />
-                </div>
-                <div className="flex flex-col gap-[4px]">
-                  <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[16px] text-black tracking-[0.1105px]">Anonymous</p>
-                  <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#0e3c84] text-[12px]">Testimonial</p>
-                </div>
-              </div>
-              <div className="h-[68px] overflow-hidden">
-                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px]">
-                  Hi everyone, it has been really difficult these days navigating life. I feel empty. I feel lost. I feel like giving up. Every step i take feels heavy. Hi everyone, i...
-                </p>
-              </div>
-              <div className="flex gap-[8px] items-center">
-                <div className="flex gap-[4px] items-center">
-                  <img alt="" className="size-[16px]" src={videoIcon} />
-                  <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px]">3mins video</p>
-                </div>
-                <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px]">•</p>
-                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[rgba(4,26,82,0.57)] text-[12px] tracking-[0.043px]">24 Mar 26</p>
-              </div>
-            </div>
-
-            {/* Gratitude Card */}
-            <div className="bg-white flex flex-col gap-[12px] pb-[16px] pt-[12px] px-[16px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)] shrink-0 w-[280px]">
-              <div className="flex gap-[12px] items-center">
-                <div className="overflow-clip rounded-[10px] shrink-0 size-[40px]">
-                  <img alt="" className="size-full object-cover" src={communityAvatarAnon} />
-                </div>
-                <div className="flex flex-col gap-[4px]">
-                  <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[16px] text-black tracking-[0.1105px]">Anonymous</p>
-                  <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[rgba(184,137,26,0.72)] text-[12px]">Gratitude</p>
-                </div>
-              </div>
-              <div className="h-[68px] overflow-hidden">
-                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px]">
-                  Hi everyone, it has been really difficult these days navigating life. I feel empty. I feel lost. I feel like giving up. Every step i take feels heavy. Hi everyone, i...
-                </p>
-              </div>
-              <div className="flex gap-[8px] items-center">
-                <div className="flex gap-[4px] items-center">
-                  <img alt="" className="size-[16px]" src={videoIcon} />
-                  <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px]">4mins video</p>
-                </div>
-                <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px]">•</p>
-                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[rgba(4,26,82,0.57)] text-[12px] tracking-[0.043px]">24 Mar 26</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       </>
       )}

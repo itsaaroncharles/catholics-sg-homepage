@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import profileAvatarImg from "../assets/profile-avatar.png";
-import profileBgImg from "../assets/profile-bg.png";
+import profileBgVideo from "../assets/Profile-BG.mp4";
 import ringImg from "../assets/Ring.svg";
 import cardBgImg from "../assets/card-BG.svg";
 import sacramentModalBgImg from "../assets/sacrament-bg.png";
@@ -355,7 +355,14 @@ export default function ProfilePage({ onBottomSheetChange }: { onBottomSheetChan
     <div className="flex flex-col items-start pb-[108px] relative size-full">
       {/* Profile Hero — compact purple bar with avatar */}
       <div className="relative h-[140px] mb-[-24px] w-full shrink-0">
-        <img alt="" className="absolute inset-0 w-full h-full object-cover" src={profileBgImg} />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src={profileBgVideo}
+        />
         <div className="absolute bottom-[48px] left-[16px] flex gap-[16px] items-center pt-[24px]">  
           {/* Avatar */}
           <div className="overflow-hidden rounded-[16px] shrink-0 size-[64px]">

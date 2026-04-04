@@ -285,21 +285,37 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  const updateBulletinIndex = useCallback(() => {
+    if (bulletinScrollRef.current) {
+      const width = bulletinScrollRef.current.offsetWidth;
+      const scrollLeft = bulletinScrollRef.current.scrollLeft;
+      const newIndex = Math.round(scrollLeft / width);
+      if (newIndex >= 0 && newIndex < bulletinSlides.length) {
+        setBulletinIndex(newIndex);
+      }
+    }
+  }, []);
+
   const handleBulletinScroll = useCallback(() => {
     if (bulletinDebounceRef.current) {
       clearTimeout(bulletinDebounceRef.current);
     }
-    bulletinDebounceRef.current = setTimeout(() => {
-      if (bulletinScrollRef.current) {
-        const width = bulletinScrollRef.current.offsetWidth;
-        const scrollLeft = bulletinScrollRef.current.scrollLeft;
-        const newIndex = Math.round(scrollLeft / width);
-        if (newIndex >= 0 && newIndex < bulletinSlides.length) {
-          setBulletinIndex(newIndex);
-        }
+    bulletinDebounceRef.current = setTimeout(updateBulletinIndex, 150);
+  }, [updateBulletinIndex]);
+
+  // Use scrollend for accurate final position (fires after snap settles)
+  useEffect(() => {
+    const el = bulletinScrollRef.current;
+    if (!el) return;
+    const onScrollEnd = () => {
+      if (bulletinDebounceRef.current) {
+        clearTimeout(bulletinDebounceRef.current);
       }
-    }, 50);
-  }, []);
+      updateBulletinIndex();
+    };
+    el.addEventListener('scrollend', onScrollEnd);
+    return () => el.removeEventListener('scrollend', onScrollEnd);
+  }, [updateBulletinIndex]);
 
   return (
     <div className="min-h-screen bg-[#fffcf5] relative" style={{ maxWidth: '430px', margin: '0 auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>

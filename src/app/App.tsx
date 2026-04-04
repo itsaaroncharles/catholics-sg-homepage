@@ -276,7 +276,7 @@ export default function App() {
       setBulletinIndex((prev) => (prev + 1) % bulletinSlides.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [bulletinIndex]);
 
   return (
     <div className="min-h-screen bg-[#fffcf5] relative" style={{ maxWidth: '430px', margin: '0 auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>

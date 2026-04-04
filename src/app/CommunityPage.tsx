@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { motion } from "motion/react";
+import svgPaths from '../imports/svg-p881keacq0';
+import imgJamieOliver from "../assets/Testimonial_Jamie Oliver.png";
+import imgAnonymous from "../assets/Testimonial_Anonymous.png";
+import imgSerenaWilliams from "../assets/Testimonial_Serena Williams.png";
+import imgChadJohnson from "../assets/Testimonial_Chad Johnson.png";
+import imgAvatar from "../assets/Community_Avatar.png";
 
-// Community post images (from Figma design)
-const imgStarryNight = "https://www.figma.com/api/mcp/asset/4cc2bef9-b7ad-47b3-862c-b2463fe3b023";
-const imgMountainClouds = "https://www.figma.com/api/mcp/asset/3f1f742d-42c8-455a-9026-5d3e1a23694c";
-const imgCoupleField = "https://www.figma.com/api/mcp/asset/5943d0cb-d2a2-486e-831a-02aa3d94a8e8";
-const imgChurchBuilding = "https://www.figma.com/api/mcp/asset/2555717e-6315-4354-84e1-fa32045f99ff";
-const imgAvatar = "https://www.figma.com/api/mcp/asset/bc403fc7-d578-4b38-94a5-1f647aa5130a";
 const imgPlayIcon = "https://www.figma.com/api/mcp/asset/c367b73f-1880-478e-ba3c-3cf17489a2ac";
 const imgSearchIcon = "https://www.figma.com/api/mcp/asset/7f9faa06-994a-4c18-a368-a050a3b21dbf";
 
@@ -28,7 +29,7 @@ const POSTS: CommunityPost[] = [
     text: "I've been feeling so much lighter since joining this community. It's like a weight has been lifted, and I'm excited to face each new day.",
     category: "Testimonial",
     categoryColor: "#0e3c84",
-    image: imgStarryNight,
+    image: imgJamieOliver,
     hasVideo: true,
   },
   {
@@ -51,7 +52,7 @@ const POSTS: CommunityPost[] = [
     text: "I'm sending out a huge thank you to everyone who offered advice last week. Your words of encouragement truly lifted my spirits.",
     category: "Testimonial",
     categoryColor: "#0e3c84",
-    image: imgMountainClouds,
+    image: imgAnonymous,
     hasVideo: true,
   },
   {
@@ -60,7 +61,7 @@ const POSTS: CommunityPost[] = [
     text: "I'm so grateful for the support I've received here. Knowing I'm not alone has made all the difference.",
     category: "Testimonial",
     categoryColor: "#0e3c84",
-    image: imgCoupleField,
+    image: imgSerenaWilliams,
   },
   {
     id: 6,
@@ -68,7 +69,7 @@ const POSTS: CommunityPost[] = [
     text: "This community has given me a renewed sense of purpose. I'm inspired to give back and make a positive impact on the world.",
     category: "Testimonial",
     categoryColor: "#0e3c84",
-    image: imgChurchBuilding,
+    image: imgChadJohnson,
   },
 ];
 
@@ -130,6 +131,23 @@ function PostCard({ post }: { post: CommunityPost }) {
 
 export default function CommunityPage() {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("All");
+  const [chipsVisible, setChipsVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY.current;
+      if (delta > 5 && currentScrollY > 60) {
+        setChipsVisible(false);
+      } else if (delta < -5) {
+        setChipsVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Split posts into two columns for masonry layout
   const leftPosts = POSTS.filter((_, i) => i % 2 === 0);
@@ -138,39 +156,78 @@ export default function CommunityPage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#fffcf5]">
       {/* Header */}
-      <div className="sticky top-0 z-20 bg-[#fffcf5] flex flex-col gap-[16px] px-[16px] pt-[16px] pb-[12px]">
-        {/* Top row: Singapore / OLPS + search */}
-        <div className="flex items-center justify-between">
-          <div className="flex gap-[16px] h-[24px] items-center">
-            <p className="font-['Fira_Sans:Regular',sans-serif] leading-[20px] text-[16px] text-black">
-              Singapore
-            </p>
-            <div className="border-b-2 border-black pb-[4px]">
-              <p className="font-['Fira_Sans:Bold',sans-serif] leading-[20px] text-[16px] text-black">
-                OLPS
-              </p>
+      <div className="sticky top-0 z-20 bg-[#fffcf5]">
+        {/* Search bar + Create button */}
+        <div className="flex gap-[12px] items-center px-[16px] pt-[16px] pb-[16px]">
+          <div className="relative bg-white content-stretch flex flex-1 gap-[8px] h-[44px] items-center pl-[13px] pr-[16px] py-px rounded-[12px]">
+            {/* Animated gradient border */}
+            <motion.div
+              className="absolute inset-0 rounded-[12px] pointer-events-none"
+              style={{
+                background: 'linear-gradient(90deg, #e92823, #E7C749, #e92823)',
+                backgroundSize: '200% 100%',
+                padding: '1px',
+                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                WebkitMaskComposite: 'xor',
+                maskComposite: 'exclude'
+              }}
+              animate={{
+                backgroundPosition: ['0% 50%', '200% 50%', '0% 50%']
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            <div
+              aria-hidden="true"
+              className="absolute border border-transparent border-solid inset-0 pointer-events-none rounded-[12px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)]"
+            />
+            <div className="relative shrink-0 size-[24px] flex items-center justify-center">
+              <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
+                <g>
+                  <path d={svgPaths.pfe415c0} fill="#898989" />
+                </g>
+              </svg>
             </div>
+            <p className="flex-1 font-['Fira_Sans:Regular',sans-serif] leading-[20px] text-[14px] text-[rgba(0,0,0,0.5)]">
+              Search for a topic
+            </p>
           </div>
-          <div className="size-[24px]">
-            <img alt="Search" className="size-full" src={imgSearchIcon} />
-          </div>
+          <button className="shrink-0 size-[44px] bg-[#e92823] rounded-full flex items-center justify-center cursor-pointer border-none">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 4V16M4 10H16" stroke="white" strokeWidth="2.5" strokeLinecap="round" />
+            </svg>
+          </button>
         </div>
 
-        {/* Filter chips */}
-        <div className="flex gap-[8px] overflow-x-auto -mx-[16px] px-[16px]" style={{ scrollbarWidth: 'none' }}>
-          {FILTERS.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`shrink-0 px-[12px] py-[4px] rounded-[4px] font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[12px] cursor-pointer transition-colors ${
-                activeFilter === filter
-                  ? "bg-[#434343] text-white border border-[#434343]"
-                  : "bg-white text-[#434343] border border-[#434343]"
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
+        {/* Filter chips - clips inside overflow-hidden so it slides behind the header */}
+        <div className="overflow-hidden bg-[#fffcf5]">
+          <motion.div
+            animate={{
+              y: chipsVisible ? 0 : -44,
+              marginBottom: chipsVisible ? 0 : -44,
+            }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="pb-[12px]"
+          >
+            <div className="flex gap-[8px] overflow-x-auto px-[16px]" style={{ scrollbarWidth: 'none' }}>
+              {FILTERS.map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setActiveFilter(filter)}
+                  className={`shrink-0 px-[16px] py-[6px] rounded-[999px] font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[12px] cursor-pointer transition-colors ${
+                    activeFilter === filter
+                      ? "bg-[#434343] text-white"
+                      : "bg-transparent text-[#434343]"
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
 

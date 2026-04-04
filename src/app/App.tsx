@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence, type PanInfo } from 'motion/react';
 import svgPaths from '../imports/svg-p881keacq0';
 import VideoGenerationConfirmation from '../imports/VideoGenerationConfirmation1';
 import ProfilePage from './ProfilePage';
 import CommunityPage from './CommunityPage';
+import VolunteerOpeningsPage from './VolunteerOpeningsPage';
+import articleIcon from "../assets/article-icon.svg";
 import imgImage59 from "../assets/Daily Reading.svg";
 import imgImage3 from "../assets/Daily rosary.svg";
 import imgImage4 from "../assets/AI Spiritual partner.svg";
@@ -15,6 +17,35 @@ import imgImage13 from "../assets/Fr Adrian.svg";
 import imgImage14 from "../assets/Fr Luke.svg";
 import imgMassSchedule from "../assets/Mass schedule.svg";
 import imgExploreMore from "../assets/Explore more.svg";
+import weeklyBulletinImg from "../assets/Weekly_Bulletin.png";
+import archPastoralPlanImg from "../assets/Archdiocesan_Pastoral_Plan.png";
+import lentToEasterImg from "../assets/Lent_to_Easter_Reflection.png";
+
+// Figma asset URLs for news
+const newsImg1 = "https://www.figma.com/api/mcp/asset/896dc1cb-8e3b-46a9-885c-3037b19925c5";
+const newsImg2 = "https://www.figma.com/api/mcp/asset/6f0054d8-cc94-4161-a496-468cfd99c30c";
+
+// Bulletin carousel slides
+const bulletinSlides = [
+  {
+    bgImg: "https://www.figma.com/api/mcp/asset/a745caad-2f38-4faa-afc8-7ee1c428ebb0",
+    iconImg: weeklyBulletinImg,
+    title: "Our Lady of Perpetual Succour weekly bulletin",
+    subtitle: "Download the bulletin here",
+  },
+  {
+    bgImg: "https://www.figma.com/api/mcp/asset/b6fc1e81-6e11-40ea-8913-09deca41ff01",
+    iconImg: archPastoralPlanImg,
+    title: "Archdiocesan pastoral plan 2025 \u2013 2035",
+    subtitle: "Download the full plan here",
+  },
+  {
+    bgImg: "https://www.figma.com/api/mcp/asset/314c692d-3470-4790-8af7-6f94d9043c1b",
+    iconImg: lentToEasterImg,
+    title: "Lent to Easter Reflection Booklet 2026",
+    subtitle: "Download the booklet here",
+  },
+];
 
 
 // Animated AI Icon Component
@@ -206,7 +237,9 @@ function BottomNav({ activeTab, onTabChange, visible }: { activeTab: Tab; onTabC
 export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('home');
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
+  const [showVolunteerPage, setShowVolunteerPage] = useState(false);
   const [verseIndex, setVerseIndex] = useState(0);
+  const [bulletinIndex, setBulletinIndex] = useState(0);
   const [navVisible, setNavVisible] = useState(true);
   const verses = [
     { text: "I am the way, the truth and the life.", reference: "- John 14:6" },
@@ -236,6 +269,13 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBulletinIndex((prev) => (prev + 1) % bulletinSlides.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [bulletinIndex]);
+
   return (
     <div className="min-h-screen bg-[#fffcf5] relative" style={{ maxWidth: '430px', margin: '0 auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
       <style>{`
@@ -248,16 +288,18 @@ export default function App() {
         }
       `}</style>
 
-      {activeTab === 'me' ? (
+      {showVolunteerPage ? (
+        <VolunteerOpeningsPage onBack={() => { setShowVolunteerPage(false); window.scrollTo(0, 0); }} />
+      ) : activeTab === 'me' ? (
         <ProfilePage onBottomSheetChange={setBottomSheetOpen} />
       ) : activeTab === 'community' ? (
         <CommunityPage />
       ) : (
       <>
       {/* Hero Section */}
-      <div className="relative h-[363px] mb-[-24px]">
-        <div className="absolute h-[363px] left-0 top-0 w-full overflow-clip">
-          <div className="absolute h-[363px] left-1/2 -translate-x-1/2 top-0 w-[646px]">
+      <div className="relative h-[300px] mb-[-24px]">
+        <div className="absolute h-[300px] left-0 top-0 w-full overflow-clip">
+          <div className="absolute h-[300px] left-1/2 -translate-x-1/2 top-0 w-[646px]">
             <VideoGenerationConfirmation />
           </div>
 
@@ -306,55 +348,8 @@ export default function App() {
 
       {/* Main Content */}
       <div className="flex flex-col gap-[16px] px-[16px] pt-[16px] pb-[120px]">
-        {/* Announcements Swimlane */}
-        <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] py-[8px] -my-[8px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
-          {/* Card 1: Holy Land tour */}
-          <div className="bg-white flex gap-[12px] items-start overflow-hidden p-[12px] rounded-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 w-[280px]">
-            <div className="overflow-hidden relative rounded-[8px] self-stretch shrink-0 w-[80px]">
-              <img
-                alt="Holy Land panorama"
-                className="absolute inset-0 h-full w-full object-cover"
-                src="https://www.figma.com/api/mcp/asset/22c67a32-eebc-4b8e-9486-5aecc7966bb7"
-              />
-            </div>
-            <div className="flex flex-1 flex-col gap-[16px] items-start min-w-0">
-              <div className="flex flex-col gap-[8px] items-start w-full">
-                <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[#43537b] text-[16px] tracking-[0.11px]">
-                  Holy Land tour schedule is available
-                </p>
-                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px] line-clamp-2">
-                  Join our parish pilgrimage to the Holy Land in 2026. View the full itinerary and registration details now.
-                </p>
-              </div>
-              <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#84160e] text-[12px] whitespace-nowrap">
-                Church Announcement
-              </p>
-            </div>
-          </div>
-
-          {/* Card 2: Catechist needed */}
-          <div className="bg-white flex gap-[12px] items-start overflow-hidden p-[12px] rounded-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 w-[280px]">
-            <div className="flex flex-1 flex-col gap-[16px] items-start min-w-0">
-              <div className="flex flex-col gap-[8px] items-start w-full">
-                <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[#43537b] text-[16px] tracking-[0.11px]">
-                  Catechist needed for 2026
-                </p>
-                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px] line-clamp-3">
-                  We are looking for dedicated volunteers to serve as catechists in 2026. Training and guidance will be provided. Come journey with our youth in faith.
-                </p>
-              </div>
-              <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#2a0e84] text-[12px] whitespace-nowrap">
-                Parish Announcement
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Explore Section */}
-        <div className="flex flex-col gap-[16px] pt-[16px]">
-          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Explore</p>
-
-          <div className="grid grid-cols-4 gap-[8px]">
+        {/* Explore Grid - 2 rows of 4 */}
+        <div className="grid grid-cols-4 gap-[8px]">
             {/* Daily Reading */}
             <div className="bg-white flex flex-col gap-[12px] h-[108px] items-center min-w-[80px] p-[12px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_3.441px_6.882px_0px_rgba(208,185,133,0.15)]">
               <div className="h-[40px] flex items-center justify-center w-[80px]">
@@ -368,7 +363,7 @@ export default function App() {
               <div className="h-[40px] flex items-center justify-center w-[80px]">
                 <img alt="" className="h-[40px] w-auto" src={imgImage3} />
               </div>
-              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px]">Daily rosary</p>
+              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px]">Daily{'\n'}Rosary</p>
             </div>
 
             {/* AI Spiritual Partner */}
@@ -379,13 +374,16 @@ export default function App() {
               <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px]">Private reflection</p>
             </div>
 
-            {/* Volunteer openings */}
-            <div className="bg-white flex flex-col gap-[12px] h-[108px] items-center min-w-[80px] p-[12px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)]">
+            {/* Volunteer openings - clickable */}
+            <button
+              onClick={() => { setShowVolunteerPage(true); window.scrollTo(0, 0); }}
+              className="bg-white flex flex-col gap-[12px] h-[108px] items-center min-w-[80px] p-[12px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)] cursor-pointer border-none"
+            >
               <div className="h-[40px] flex items-center justify-center w-[80px]">
                 <img alt="" className="h-[40px] w-auto" src={imgImage60} />
               </div>
               <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px]">Volunteer openings</p>
-            </div>
+            </button>
 
             {/* Mass schedule */}
             <div className="bg-white flex flex-col gap-[12px] h-[108px] items-center min-w-[80px] p-[12px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)]">
@@ -416,8 +414,66 @@ export default function App() {
               <div className="h-[40px] flex items-center justify-center w-[80px]">
                 <img alt="" className="h-[40px] w-auto" src={imgExploreMore} />
               </div>
-              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px]">Explore more</p>
+              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px]">Explore{'\n'}more</p>
             </div>
+        </div>
+
+        {/* Bulletin Carousel */}
+        <div className="relative w-full overflow-hidden rounded-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)]">
+          <motion.div
+            className="flex"
+            animate={{ x: `-${bulletinIndex * 100}%` }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.12}
+            onDragEnd={(_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+              const threshold = 50;
+              if (info.offset.x < -threshold && bulletinIndex < bulletinSlides.length - 1) {
+                setBulletinIndex(bulletinIndex + 1);
+              } else if (info.offset.x > threshold && bulletinIndex > 0) {
+                setBulletinIndex(bulletinIndex - 1);
+              }
+            }}
+          >
+            {bulletinSlides.map((slide, i) => (
+              <button
+                key={i}
+                className="bg-white cursor-pointer flex gap-[19px] items-center overflow-clip p-[16px] relative rounded-[16px] w-full border-none text-left shrink-0"
+              >
+                {/* Elliptical background */}
+                <div className="-translate-x-1/2 absolute flex h-[329px] items-center justify-center left-[calc(50%+10px)] top-[-23px] w-[493px] pointer-events-none">
+                  <div className="-scale-y-100 flex-none">
+                    <img alt="" className="h-[329px] w-[493px] object-cover" src={slide.bgImg} />
+                  </div>
+                </div>
+                <div className="h-[64px] shrink-0 w-[70px] relative z-[1]">
+                  <img alt="" className="h-full w-full object-contain" src={slide.iconImg} />
+                </div>
+                <div className="flex flex-col gap-[8px] items-start justify-center relative z-[1] w-[210px] shrink-0">
+                  <p
+                    className="bg-clip-text font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[16px] text-[transparent] tracking-[0.1105px] w-full"
+                    style={{ backgroundImage: "linear-gradient(94deg, rgb(90, 49, 21) 8%, rgb(136, 105, 85) 57%, rgb(186, 132, 96) 124%)" }}
+                  >
+                    {slide.title}
+                  </p>
+                  <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#52371c] text-[12px] tracking-[0.043px]">
+                    {slide.subtitle}
+                  </p>
+                </div>
+              </button>
+            ))}
+          </motion.div>
+          {/* Pagination dots */}
+          <div className="absolute bg-[rgba(0,0,0,0.3)] flex gap-[4px] items-center p-[4px] right-[8px] rounded-[99px] top-[8px] z-10">
+            {bulletinSlides.map((_, i) => (
+              <div
+                key={i}
+                className={`h-[4px] rounded-[999px] transition-all duration-300 ${
+                  i === bulletinIndex ? 'w-[10px] bg-white' : 'w-[4px] bg-[#d3d3d3]'
+                }`}
+              />
+            ))}
           </div>
         </div>
 
@@ -463,12 +519,80 @@ export default function App() {
           </div>
         </div>
 
+        {/* Catholic News */}
+        <div className="flex flex-col gap-[16px] pt-[16px]">
+          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Catholic News</p>
+
+          <div className="flex gap-[16px] overflow-x-auto -mx-[16px] px-[16px] py-[4px] -my-[4px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
+            {/* News Card 1 */}
+            <div className="flex shrink-0 items-stretch">
+              <div className="bg-white h-[153px] w-[100px] overflow-hidden rounded-tl-[16px] rounded-bl-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0">
+                <img alt="" className="w-full h-full object-cover" src={newsImg1} />
+              </div>
+              <div className="bg-white flex items-start p-[12px] rounded-tr-[16px] rounded-br-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] w-[240px]">
+                <div className="flex flex-1 flex-col h-full items-start justify-between">
+                  <div className="flex flex-col gap-[8px] items-start w-full">
+                    <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[#43537b] text-[16px] tracking-[0.1105px] w-full line-clamp-2">
+                      St Joseph's silent witness held up as model for families at fea...
+                    </p>
+                    <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px] w-full line-clamp-3">
+                      At Saint Joseph's Church (Victoria Street) feast day Mass on March 19, presider Cardinal William Go...
+                    </p>
+                  </div>
+                  <div className="flex gap-[8px] items-center mt-[8px]">
+                    <div className="flex gap-[4px] items-center">
+                      <img alt="" className="shrink-0 size-[16px]" src={articleIcon} />
+                      <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">
+                        2mins read
+                      </p>
+                    </div>
+                    <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px]">•</p>
+                    <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px]">
+                      1 Apr 26
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* News Card 2 */}
+            <div className="flex shrink-0 items-stretch">
+              <div className="bg-white h-[153px] w-[100px] overflow-hidden rounded-tl-[16px] rounded-bl-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0">
+                <img alt="" className="w-full h-full object-cover" src={newsImg2} />
+              </div>
+              <div className="bg-white flex items-start p-[12px] rounded-tr-[16px] rounded-br-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] w-[240px]">
+                <div className="flex flex-1 flex-col h-full items-start justify-between">
+                  <div className="flex flex-col gap-[8px] items-start w-full">
+                    <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[#43537b] text-[16px] tracking-[0.1105px] w-full line-clamp-2">
+                      Prayer, fasting, and almsgiving
+                    </p>
+                    <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px] w-full line-clamp-3">
+                      This season, CATHOLIC NEWS takes a look at what our parishes, schools, and church organisations did by way of the three pillars of Lent.
+                    </p>
+                  </div>
+                  <div className="flex gap-[8px] items-center mt-[8px]">
+                    <div className="flex gap-[4px] items-center">
+                      <img alt="" className="shrink-0 size-[16px]" src={articleIcon} />
+                      <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">
+                        2mins read
+                      </p>
+                    </div>
+                    <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px]">•</p>
+                    <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px]">
+                      1 Apr 26
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
       </>
       )}
 
-      {!bottomSheetOpen && <BottomNav activeTab={activeTab} onTabChange={(tab) => { setActiveTab(tab); window.scrollTo(0, 0); }} visible={navVisible} />}
+      {!bottomSheetOpen && !showVolunteerPage && <BottomNav activeTab={activeTab} onTabChange={(tab) => { setActiveTab(tab); window.scrollTo(0, 0); }} visible={navVisible} />}
     </div>
   );
 }

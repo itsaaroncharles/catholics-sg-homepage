@@ -411,8 +411,8 @@ export default function ProfilePage({ onBottomSheetChange }: { onBottomSheetChan
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] not-italic text-[#041a52] text-[18px] w-full">
             Profile
           </p>
+          <MenuItem label="My Parish" />
           <MenuItem label="Family tree" />
-          <MenuItem label="MyVolunteer" />
           <MenuItem label="Sacraments" onClick={openSacramentsList} />
           <MenuItem label="Edit profile" />
         </div>
@@ -424,7 +424,23 @@ export default function ProfilePage({ onBottomSheetChange }: { onBottomSheetChan
           </p>
           <MenuItem label="Download certificates" />
           <MenuItem label="Contact us" />
+          <MenuItem label="Career" />
           <MenuItem label="Log out" />
+        </div>
+
+        {/* Footer */}
+        <div className="flex flex-col gap-[12px] items-center w-full pt-[8px] pb-[16px]">
+          <img
+            alt="CatholicSG"
+            className="h-[32px] w-auto"
+            src="https://www.figma.com/api/mcp/asset/ed0b5917-de34-4e2a-8a23-17dde3ed0921"
+          />
+          <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#999] text-[12px] text-center tracking-[0.043px]">
+            ©2026{"\n"}Roman Catholic Archdiocese of Singapore{"\n"}Digital Church Office (DCO)
+          </p>
+          <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#999] text-[12px] text-center tracking-[0.043px]">
+            App Version: 2.1.65
+          </p>
         </div>
       </div>
 

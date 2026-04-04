@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import svgPaths from '../imports/svg-p881keacq0';
 import VideoGenerationConfirmation from '../imports/VideoGenerationConfirmation1';
@@ -241,8 +241,8 @@ export default function App() {
   const [verseIndex, setVerseIndex] = useState(0);
   const [bulletinIndex, setBulletinIndex] = useState(0);
   const [navVisible, setNavVisible] = useState(true);
-  const bulletinScrollRef = useRef<HTMLDivElement>(null);
-  const bulletinDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartX = useRef(0);
+  const touchDeltaX = useRef(0);
   const verses = [
     { text: "I am the way, the truth and the life.", reference: "- John 14:6" },
     { text: "Peace be with you, always.", reference: "- John 20:19" },
@@ -273,49 +273,10 @@ export default function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (bulletinScrollRef.current) {
-        const width = bulletinScrollRef.current.offsetWidth;
-        const scrollLeft = bulletinScrollRef.current.scrollLeft;
-        const currentIndex = Math.round(scrollLeft / width);
-        const nextIndex = (currentIndex + 1) % bulletinSlides.length;
-        bulletinScrollRef.current.scrollTo({ left: nextIndex * width, behavior: 'smooth' });
-        setBulletinIndex(nextIndex);
-      }
+      setBulletinIndex((prev) => (prev + 1) % bulletinSlides.length);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
-
-  const updateBulletinIndex = useCallback(() => {
-    if (bulletinScrollRef.current) {
-      const width = bulletinScrollRef.current.offsetWidth;
-      const scrollLeft = bulletinScrollRef.current.scrollLeft;
-      const newIndex = Math.round(scrollLeft / width);
-      if (newIndex >= 0 && newIndex < bulletinSlides.length) {
-        setBulletinIndex(newIndex);
-      }
-    }
-  }, []);
-
-  const handleBulletinScroll = useCallback(() => {
-    if (bulletinDebounceRef.current) {
-      clearTimeout(bulletinDebounceRef.current);
-    }
-    bulletinDebounceRef.current = setTimeout(updateBulletinIndex, 150);
-  }, [updateBulletinIndex]);
-
-  // Use scrollend for accurate final position (fires after snap settles)
-  useEffect(() => {
-    const el = bulletinScrollRef.current;
-    if (!el) return;
-    const onScrollEnd = () => {
-      if (bulletinDebounceRef.current) {
-        clearTimeout(bulletinDebounceRef.current);
-      }
-      updateBulletinIndex();
-    };
-    el.addEventListener('scrollend', onScrollEnd);
-    return () => el.removeEventListener('scrollend', onScrollEnd);
-  }, [updateBulletinIndex]);
 
   return (
     <div className="min-h-screen bg-[#fffcf5] relative" style={{ maxWidth: '430px', margin: '0 auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
@@ -460,17 +421,34 @@ export default function App() {
         </div>
 
         {/* Bulletin Carousel */}
-        <div className="relative w-full rounded-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)]">
-          <div
-            ref={bulletinScrollRef}
-            className="flex overflow-x-auto snap-x snap-mandatory"
-            style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
-            onScroll={handleBulletinScroll}
+        <div
+          className="relative w-full overflow-hidden rounded-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)]"
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0].clientX;
+            touchDeltaX.current = 0;
+          }}
+          onTouchMove={(e) => {
+            touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+          }}
+          onTouchEnd={() => {
+            const threshold = 50;
+            if (touchDeltaX.current < -threshold) {
+              setBulletinIndex((prev) => Math.min(prev + 1, bulletinSlides.length - 1));
+            } else if (touchDeltaX.current > threshold) {
+              setBulletinIndex((prev) => Math.max(prev - 1, 0));
+            }
+            touchDeltaX.current = 0;
+          }}
+        >
+          <motion.div
+            className="flex"
+            animate={{ x: `-${bulletinIndex * 100}%` }}
+            transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
           >
             {bulletinSlides.map((slide, i) => (
               <button
                 key={i}
-                className="snap-start bg-white cursor-pointer flex gap-[19px] items-center overflow-clip p-[16px] relative rounded-[16px] w-full border-none text-left shrink-0"
+                className="bg-white cursor-pointer flex gap-[19px] items-center overflow-clip p-[16px] relative rounded-[16px] w-full border-none text-left shrink-0"
               >
                 {/* Elliptical background */}
                 <div className="-translate-x-1/2 absolute flex h-[329px] items-center justify-center left-[calc(50%+10px)] top-[-23px] w-[493px] pointer-events-none">
@@ -494,7 +472,7 @@ export default function App() {
                 </div>
               </button>
             ))}
-          </div>
+          </motion.div>
           {/* Pagination dots */}
           <div className="absolute bg-[rgba(0,0,0,0.3)] flex gap-[4px] items-center p-[4px] right-[8px] rounded-[99px] top-[8px] z-10">
             {bulletinSlides.map((_, i) => (

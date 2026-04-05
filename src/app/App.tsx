@@ -5,6 +5,7 @@ import VideoGenerationConfirmation from '../imports/VideoGenerationConfirmation1
 import ProfilePage from './ProfilePage';
 import CommunityPage from './CommunityPage';
 import VolunteerOpeningsPage from './VolunteerOpeningsPage';
+import ResourcesPage from './ResourcesPage';
 import articleIcon from "../assets/article-icon.svg";
 import imgImage59 from "../assets/Daily Reading.svg";
 import imgImage3 from "../assets/Daily rosary.svg";
@@ -17,13 +18,16 @@ import imgImage13 from "../assets/Fr Adrian.svg";
 import imgImage14 from "../assets/Fr Luke.svg";
 import imgMassSchedule from "../assets/Mass schedule.svg";
 import imgExploreMore from "../assets/Explore more.svg";
+import imgMediaResources from "../assets/Education centre.svg";
+import imgStJoseph from "../assets/St-Joseph.png";
+import imgPrayerFasting from "../assets/Prayer.png";
 import weeklyBulletinImg from "../assets/Weekly_Bulletin.png";
 import archPastoralPlanImg from "../assets/Archdiocesan_Pastoral_Plan.png";
 import lentToEasterImg from "../assets/Lent_to_Easter_Reflection.png";
 
-// Figma asset URLs for news
-const newsImg1 = "https://www.figma.com/api/mcp/asset/896dc1cb-8e3b-46a9-885c-3037b19925c5";
-const newsImg2 = "https://www.figma.com/api/mcp/asset/6f0054d8-cc94-4161-a496-468cfd99c30c";
+// Local article images
+const newsImg1 = imgStJoseph;
+const newsImg2 = imgPrayerFasting;
 
 // Bulletin carousel slides
 const bulletinSlides = [
@@ -296,6 +300,8 @@ export default function App() {
         <ProfilePage onBottomSheetChange={setBottomSheetOpen} />
       ) : activeTab === 'community' ? (
         <CommunityPage />
+      ) : activeTab === 'resources' ? (
+        <ResourcesPage />
       ) : (
       <>
       {/* Hero Section */}
@@ -403,12 +409,12 @@ export default function App() {
               <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px]">Offertory & Giving</p>
             </div>
 
-            {/* Education centre */}
+            {/* Media Resources */}
             <div className="bg-white flex flex-col gap-[12px] h-[108px] items-center min-w-[80px] p-[12px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_3.441px_6.882px_0px_rgba(208,185,133,0.15)]">
               <div className="h-[40px] flex items-center justify-center w-[80px]">
-                <img alt="" className="h-[40px] w-auto" src={imgImage6} />
+                <img alt="" className="h-[40px] w-auto" src={imgMediaResources} />
               </div>
-              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px]">Education centre</p>
+              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px]">Media{`\n`}Resources</p>
             </div>
 
             {/* Explore more */}
@@ -528,71 +534,108 @@ export default function App() {
           </div>
         </div>
 
-        {/* Catholic News */}
+        {/* Latest Articles */}
         <div className="flex flex-col gap-[16px] pt-[16px]">
-          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Catholic News</p>
+          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Latest Articles</p>
 
           <div className="flex gap-[16px] overflow-x-auto -mx-[16px] px-[16px] py-[4px] -my-[4px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
             {/* News Card 1 */}
-            <div className="flex shrink-0 items-stretch">
-              <div className="bg-white h-[153px] w-[100px] overflow-hidden rounded-tl-[16px] rounded-bl-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0">
-                <img alt="" className="w-full h-full object-cover" src={newsImg1} />
+            <div className="flex shrink-0 items-center">
+              <div className="bg-white h-[153px] w-[100px] overflow-clip rounded-bl-[16px] rounded-tl-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 relative">
+                <img alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none" src={newsImg1} />
               </div>
-              <div className="bg-white flex items-start p-[12px] rounded-tr-[16px] rounded-br-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] w-[240px]">
-                <div className="flex flex-1 flex-col h-full items-start justify-between">
-                  <div className="flex flex-col gap-[8px] items-start w-full">
-                    <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[#43537b] text-[16px] tracking-[0.1105px] w-full line-clamp-2">
-                      St Joseph's silent witness held up as model for families at fea...
-                    </p>
-                    <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px] w-full line-clamp-3">
-                      At Saint Joseph's Church (Victoria Street) feast day Mass on March 19, presider Cardinal William Go...
-                    </p>
-                  </div>
-                  <div className="flex gap-[8px] items-center mt-[8px]">
-                    <div className="flex gap-[4px] items-center">
-                      <img alt="" className="shrink-0 size-[16px]" src={articleIcon} />
-                      <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">
-                        2mins read
+              <div className="flex flex-row items-center self-stretch">
+                <div className="bg-white flex h-full items-start justify-center overflow-clip p-[12px] rounded-br-[16px] rounded-tr-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 w-[240px]">
+                  <div className="flex flex-[1_0_0] flex-col h-full items-start justify-between min-h-px min-w-px">
+                    <div className="flex flex-col gap-[8px] h-[96px] items-start w-full">
+                      <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] max-h-[38px] overflow-hidden text-[#43537b] text-[16px] text-ellipsis tracking-[0.1105px] w-full">
+                        St Joseph's silent witness held up as model for families at feast day Mass
                       </p>
+                      <div className="flex flex-[1_0_0] flex-col font-['Fira_Sans:Regular',sans-serif] justify-center leading-[0] max-h-[66px] min-h-px min-w-px overflow-hidden text-[#041a52] text-[14px] text-ellipsis tracking-[0.043px] w-full">
+                        <p className="leading-[16px]">At Saint Joseph's Church (Victoria Street) feast day Mass on March 19, presider Cardinal William Goh described the church's patron saint as a model of faith, fatherhood, and fidelity to God's will.</p>
+                      </div>
                     </div>
-                    <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px]">•</p>
-                    <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px]">
-                      1 Apr 26
-                    </p>
+                    <div className="flex gap-[8px] items-start">
+                      <div className="flex gap-[4px] items-center justify-center">
+                        <img alt="" className="shrink-0 size-[16px]" src={articleIcon} />
+                        <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">
+                          2mins read
+                        </p>
+                      </div>
+                      <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">•</p>
+                      <div className="flex flex-col font-['Fira_Sans:Regular',sans-serif] justify-center leading-[0] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px] whitespace-nowrap">
+                        <p className="leading-[16px]">1 Apr 26</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* News Card 2 */}
-            <div className="flex shrink-0 items-stretch">
-              <div className="bg-white h-[153px] w-[100px] overflow-hidden rounded-tl-[16px] rounded-bl-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0">
-                <img alt="" className="w-full h-full object-cover" src={newsImg2} />
+            <div className="flex shrink-0 items-center">
+              <div className="bg-white h-[153px] w-[100px] overflow-clip rounded-bl-[16px] rounded-tl-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 relative">
+                <img alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none" src={newsImg2} />
               </div>
-              <div className="bg-white flex items-start p-[12px] rounded-tr-[16px] rounded-br-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] w-[240px]">
-                <div className="flex flex-1 flex-col h-full items-start justify-between">
-                  <div className="flex flex-col gap-[8px] items-start w-full">
-                    <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[#43537b] text-[16px] tracking-[0.1105px] w-full line-clamp-2">
-                      Prayer, fasting, and almsgiving
-                    </p>
-                    <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px] w-full line-clamp-3">
-                      This season, CATHOLIC NEWS takes a look at what our parishes, schools, and church organisations did by way of the three pillars of Lent.
-                    </p>
-                  </div>
-                  <div className="flex gap-[8px] items-center mt-[8px]">
-                    <div className="flex gap-[4px] items-center">
-                      <img alt="" className="shrink-0 size-[16px]" src={articleIcon} />
-                      <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">
-                        2mins read
+              <div className="flex flex-row items-center self-stretch">
+                <div className="bg-white flex h-full items-start justify-center overflow-clip p-[12px] rounded-br-[16px] rounded-tr-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 w-[240px]">
+                  <div className="flex flex-[1_0_0] flex-col h-full items-start justify-between min-h-px min-w-px">
+                    <div className="flex flex-[1_0_0] flex-col gap-[8px] items-start min-h-px min-w-px w-full">
+                      <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] max-h-[38px] overflow-hidden text-[#43537b] text-[16px] text-ellipsis tracking-[0.1105px] w-full">
+                        Prayer, fasting, and almsgiving
                       </p>
+                      <div className="flex flex-col font-['Fira_Sans:Regular',sans-serif] h-[66px] justify-center leading-[0] max-h-[66px] overflow-hidden text-[#041a52] text-[14px] text-ellipsis tracking-[0.043px] w-full">
+                        <p className="leading-[16px]">This season, CATHOLIC NEWS takes a look at what our parishes, schools, and church organisations did by way of the three pillars of Lent.</p>
+                      </div>
                     </div>
-                    <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px]">•</p>
-                    <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px]">
-                      1 Apr 26
-                    </p>
+                    <div className="flex gap-[8px] items-start">
+                      <div className="flex gap-[4px] items-center justify-center">
+                        <img alt="" className="shrink-0 size-[16px]" src={articleIcon} />
+                        <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">
+                          2mins read
+                        </p>
+                      </div>
+                      <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">•</p>
+                      <div className="flex flex-col font-['Fira_Sans:Regular',sans-serif] justify-center leading-[0] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px] whitespace-nowrap">
+                        <p className="leading-[16px]">1 Apr 26</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Latest Notices & Messages */}
+        <div className="flex flex-col gap-[16px] pt-[16px]">
+          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Latest Notices & Messages</p>
+
+          <div className="flex gap-[12px] overflow-x-auto -mx-[16px] px-[16px] py-[4px] -my-[4px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
+            {/* Notice Card 1 */}
+            <div className="bg-white flex flex-col gap-[8px] p-[16px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)] shrink-0 w-[200px]">
+              <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[#43537b] text-[16px] tracking-[0.1105px]">
+                Easter Message 2026
+              </p>
+              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px] line-clamp-4">
+                His Resurrection proves that love is more powerful than hate, and life is more powerful than death. It is mercy, compassion, forgive...
+              </p>
+              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px]">
+                1 Apr 26
+              </p>
+            </div>
+
+            {/* Notice Card 2 */}
+            <div className="bg-white flex flex-col gap-[8px] p-[16px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)] shrink-0 w-[200px]">
+              <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[#43537b] text-[16px] tracking-[0.1105px]">
+                Chancery Notice Q – March 2026
+              </p>
+              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[#041a52] text-[14px] tracking-[0.043px] line-clamp-4">
+                CHN/CN/2026/006 Fr Thomas Michael Order of Discalced...
+              </p>
+              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[16px] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px]">
+                30 Mar 26
+              </p>
             </div>
           </div>
         </div>

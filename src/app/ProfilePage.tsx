@@ -13,6 +13,14 @@ import familySammy from "../assets/family-sammy.png";
 import familyAriana from "../assets/family-ariana.png";
 import familyJonathan from "../assets/family-jonathan.png";
 import churchIcon from "../assets/church-icon.svg";
+import imgYouthYoungAdults from "../assets/Youth & Young Adults.png";
+import imgVocations from "../assets/Vocations.png";
+import imgMarriageFamily from "../assets/Marriage & Family.png";
+import imgParents from "../assets/Parents.png";
+import imgElderly from "../assets/Elderly.png";
+import imgMassSchedule from "../assets/Mass schedule.svg";
+import imgOffertory from "../assets/Offertory.svg";
+import imgVolunteerOpenings from "../assets/Volunteer openings.svg";
 
 // Chevron Right Icon
 function ChevronRight() {
@@ -406,26 +414,77 @@ export default function ProfilePage({ onBottomSheetChange }: { onBottomSheetChan
           </div>
         </div>
 
+        {/* Catholic Life Stages */}
+        <div className="flex flex-col gap-[16px] items-start w-full">
+          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] not-italic text-[#041a52] text-[18px] w-full">
+            Catholic life stages
+          </p>
+          <div className="flex gap-[16px] overflow-x-auto -mx-[16px] px-[16px] py-[4px] -my-[4px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
+            {[
+              { img: imgYouthYoungAdults, label: "Youth & Young\nAdults" },
+              { img: imgVocations, label: "Vocations" },
+              { img: imgMarriageFamily, label: "Marriage &\nFamily" },
+              { img: imgParents, label: "Parents" },
+              { img: imgElderly, label: "Elderly" },
+            ].map((stage) => (
+              <div key={stage.label} className="flex flex-col items-center gap-[8px] shrink-0 w-[80px]">
+                <div className="size-[64px] rounded-full overflow-hidden shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)]">
+                  <img alt={stage.label} className="w-full h-full object-cover" src={stage.img} />
+                </div>
+                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px] whitespace-pre-line line-clamp-2">
+                  {stage.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Your Parish Section */}
+        <div className="flex flex-col gap-[16px] items-start w-full">
+          <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] not-italic text-[#041a52] text-[18px] w-full">
+            Your parish
+          </p>
+          <div className="grid grid-cols-4 gap-[8px] w-full">
+            {[
+              { img: imgMassSchedule, label: "Mass\nschedule" },
+              { img: imgVocations, label: "Pastoral\nservices" },
+              { img: imgMarriageFamily, label: "Ministries &\ncommunities" },
+              { img: imgOffertory, label: "Offertory &\nGiving" },
+              { img: churchIcon, label: "Contact\ninformation" },
+              { img: imgVolunteerOpenings, label: "Volunteer\nopenings" },
+            ].map((item) => (
+              <button key={item.label} className="bg-white border-none cursor-pointer flex flex-col gap-[8px] items-center p-[8px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)]">
+                <div className="h-[36px] w-[36px] flex items-center justify-center">
+                  <img alt="" className="h-[36px] w-auto" src={item.img} />
+                </div>
+                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[11px] text-center tracking-[0.043px] whitespace-pre-line">
+                  {item.label}
+                </p>
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Profile Section */}
         <div className="flex flex-col gap-[16px] items-start w-full">
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] not-italic text-[#041a52] text-[18px] w-full">
             Profile
           </p>
-          <MenuItem label="My Parish" />
           <MenuItem label="Family tree" />
-          <MenuItem label="Sacraments" onClick={openSacramentsList} />
+          <MenuItem label="Sacrament certificates" onClick={openSacramentsList} />
           <MenuItem label="Edit profile" />
         </div>
 
-        {/* Admin Section */}
+        {/* Contact Us Section */}
         <div className="flex flex-col gap-[16px] items-start w-full">
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] not-italic text-[#041a52] text-[18px] w-full">
-            Admin
+            Contact us
           </p>
-          <MenuItem label="Download certificates" />
-          <MenuItem label="Contact us" />
-          <MenuItem label="Career" />
-          <MenuItem label="Log out" />
+          <MenuItem label="Services & Programmes" />
+          <MenuItem label="Send enquiries" />
+          <MenuItem label="Report an incident" />
+          <MenuItem label="Join Whatsapp channel" />
+          <MenuItem label="Join Telegram channel" />
         </div>
 
         {/* Footer */}

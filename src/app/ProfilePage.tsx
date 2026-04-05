@@ -18,6 +18,7 @@ import imgVocations from "../assets/Vocations.png";
 import imgMarriageFamily from "../assets/Marriage & Family.png";
 import imgParents from "../assets/Parents.png";
 import imgElderly from "../assets/Elderly.png";
+import imgCatholicSchools from "../assets/Catholic Schools.png";
 import imgMassSchedule from "../assets/Mass schedule.svg";
 import imgOffertory from "../assets/Offertory.svg";
 import imgVolunteerOpenings from "../assets/Volunteer openings.svg";
@@ -419,19 +420,20 @@ export default function ProfilePage({ onBottomSheetChange }: { onBottomSheetChan
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] not-italic text-[#041a52] text-[18px] w-full">
             Catholic life stages
           </p>
-          <div className="flex gap-[16px] overflow-x-auto -mx-[16px] px-[16px] py-[4px] -my-[4px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
+          <div className="flex gap-[16px] overflow-x-auto touch-pan-x overscroll-x-contain w-full" style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
             {[
-              { img: imgYouthYoungAdults, label: "Youth & Young\nAdults" },
+              { img: imgYouthYoungAdults, label: "Youth & Young Adults" },
               { img: imgVocations, label: "Vocations" },
-              { img: imgMarriageFamily, label: "Marriage &\nFamily" },
+              { img: imgMarriageFamily, label: "Marriage & Family" },
               { img: imgParents, label: "Parents" },
+              { img: imgCatholicSchools, label: "Catholic Schools" },
               { img: imgElderly, label: "Elderly" },
             ].map((stage) => (
               <div key={stage.label} className="flex flex-col items-center gap-[8px] shrink-0 w-[80px]">
                 <div className="size-[64px] rounded-full overflow-hidden shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)]">
                   <img alt={stage.label} className="w-full h-full object-cover" src={stage.img} />
                 </div>
-                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px] whitespace-pre-line line-clamp-2">
+                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px] line-clamp-2">
                   {stage.label}
                 </p>
               </div>
@@ -447,17 +449,17 @@ export default function ProfilePage({ onBottomSheetChange }: { onBottomSheetChan
           <div className="grid grid-cols-4 gap-[8px] w-full">
             {[
               { img: imgMassSchedule, label: "Mass\nschedule" },
-              { img: imgVocations, label: "Pastoral\nservices" },
-              { img: imgMarriageFamily, label: "Ministries &\ncommunities" },
+              { img: imgMassSchedule, label: "Pastoral\nservices" },
+              { img: imgMassSchedule, label: "Ministries &\ncommunities" },
               { img: imgOffertory, label: "Offertory &\nGiving" },
-              { img: churchIcon, label: "Contact\ninformation" },
+              { img: imgMassSchedule, label: "Contact\ninformation" },
               { img: imgVolunteerOpenings, label: "Volunteer\nopenings" },
             ].map((item) => (
-              <button key={item.label} className="bg-white border-none cursor-pointer flex flex-col gap-[8px] items-center p-[8px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)]">
-                <div className="h-[36px] w-[36px] flex items-center justify-center">
-                  <img alt="" className="h-[36px] w-auto" src={item.img} />
+              <button key={item.label} className="bg-white border-none cursor-pointer flex flex-col gap-[12px] h-[108px] items-center min-w-[80px] p-[12px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_3.441px_6.882px_0px_rgba(208,185,133,0.15)]">
+                <div className="h-[40px] w-[80px] flex items-center justify-center">
+                  <img alt="" className="h-[40px] w-auto" src={item.img} />
                 </div>
-                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[11px] text-center tracking-[0.043px] whitespace-pre-line">
+                <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px] line-clamp-2">
                   {item.label}
                 </p>
               </button>

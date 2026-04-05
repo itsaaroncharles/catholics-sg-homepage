@@ -7,6 +7,7 @@ import imgVocations from "../assets/Vocations.png";
 import imgMarriageFamily from "../assets/Marriage & Family.png";
 import imgParents from "../assets/Parents.png";
 import imgElderly from "../assets/Elderly.png";
+import imgCatholicSchools from "../assets/Catholic Schools.png";
 import imgMassSchedule from "../assets/Mass schedule.svg";
 import imgOffertory from "../assets/Offertory.svg";
 import imgVolunteerOpenings from "../assets/Volunteer openings.svg";
@@ -140,7 +141,7 @@ const TABS: ResourceTab[] = [
 // Tab Content: Knowing Our Faith
 function KnowingOurFaith() {
   return (
-    <div className="flex flex-col gap-[16px]">
+    <div className="flex flex-col gap-[32px]">
       {/* Banner card - same style as homepage bulletin */}
       <button className="bg-white cursor-pointer flex gap-[19px] items-center overflow-clip p-[16px] relative rounded-[16px] w-full border-none text-left shrink-0">
         <div className="-translate-x-1/2 absolute flex h-[329px] items-center justify-center left-[calc(50%+10px)] top-[-23px] w-[493px] pointer-events-none">
@@ -164,12 +165,15 @@ function KnowingOurFaith() {
         </div>
       </button>
 
-      {/* Menu items */}
-      <div className="flex flex-col gap-[12px]">
-        <ResourceMenuItem label="Jesus of Nazareth" />
-        <ResourceMenuItem label="Declaration of faith" />
-        <ResourceMenuItem label="Sacred scripture" />
-        <ResourceMenuItem label="FAQs" />
+      {/* About the faith */}
+      <div className="flex flex-col gap-[16px]">
+        <SectionHeader title="About the faith" />
+        <div className="flex flex-col gap-[12px]">
+          <ResourceMenuItem label="Jesus of Nazareth" />
+          <ResourceMenuItem label="Declaration of faith" />
+          <ResourceMenuItem label="Sacred scripture" />
+          <ResourceMenuItem label="FAQs" />
+        </div>
       </div>
 
       {/* Liturgical Seasons */}
@@ -190,7 +194,7 @@ function KnowingOurFaith() {
 // Quick link grid item
 function QuickLinkCard({ img, label, onClick }: { img: string; label: string; onClick?: () => void }) {
   return (
-    <button onClick={onClick} className="bg-white border-none cursor-pointer flex flex-col gap-[12px] h-[108px] items-center w-[calc(25%-6px)] p-[12px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_3.441px_6.882px_0px_rgba(208,185,133,0.15)]">
+    <button onClick={onClick} className="bg-white border-none cursor-pointer flex flex-col gap-[12px] items-center w-[calc(25%-6px)] p-[12px] rounded-[16px] shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_3.441px_6.882px_0px_rgba(208,185,133,0.15)]">
       <div className="h-[40px] flex items-center justify-center w-[80px]">
         <img alt="" className="h-[40px] w-auto" src={img} />
       </div>
@@ -214,11 +218,11 @@ function LivingOurFaith() {
   };
 
   return (
-    <div className="flex flex-col gap-[16px]">
+    <div className="flex flex-col gap-[32px]">
       {/* Quick links grid */}
       <div className="flex flex-wrap gap-[8px]">
-        <QuickLinkCard img={imgYouthYoungAdults} label="Life Stages" onClick={() => scrollTo(lifeStagesRef)} />
-        <QuickLinkCard img={imgVocations} label="Discipleship" onClick={() => scrollTo(discipleshipRef)} />
+        <QuickLinkCard img={imgOffertory} label="Life Stages" onClick={() => scrollTo(lifeStagesRef)} />
+        <QuickLinkCard img={imgOffertory} label="Discipleship" onClick={() => scrollTo(discipleshipRef)} />
         <QuickLinkCard img={imgDailyRosary} label="Let's Pray!" onClick={() => scrollTo(prayRef)} />
         <QuickLinkCard img={imgOffertory} label="Donations" onClick={() => scrollTo(donationsRef)} />
         <QuickLinkCard img={imgVolunteerOpenings} label="Volunteer" onClick={() => scrollTo(volunteerRef)} />
@@ -226,20 +230,21 @@ function LivingOurFaith() {
 
       {/* Catholic Life Stages */}
       <div ref={lifeStagesRef} className="flex flex-col gap-[16px]">
-        <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[16px]">Catholic life stages</p>
-        <div className="flex gap-[16px] overflow-x-auto touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
+        <SectionHeader title="Catholic life stages" />
+        <div className="flex gap-[16px] overflow-x-auto touch-pan-x overscroll-x-contain w-full" style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
           {[
-            { img: imgYouthYoungAdults, label: "Youth & Young\nAdults" },
+            { img: imgYouthYoungAdults, label: "Youth & Young Adults" },
             { img: imgVocations, label: "Vocations" },
-            { img: imgMarriageFamily, label: "Marriage &\nFamily" },
+            { img: imgMarriageFamily, label: "Marriage & Family" },
             { img: imgParents, label: "Parents" },
+            { img: imgCatholicSchools, label: "Catholic Schools" },
             { img: imgElderly, label: "Elderly" },
           ].map((stage) => (
             <div key={stage.label} className="flex flex-col items-center gap-[8px] shrink-0 w-[80px]">
               <div className="size-[64px] rounded-full overflow-hidden shadow-[0px_1.72px_3.441px_0px_rgba(208,185,133,0.05),0px_2.44px_6.882px_0px_rgba(208,185,133,0.15)]">
                 <img alt={stage.label} className="w-full h-full object-cover" src={stage.img} />
               </div>
-              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px] whitespace-pre-line line-clamp-2">
+              <p className="font-['Fira_Sans:Regular',sans-serif] leading-[14px] text-[#041a52] text-[12px] text-center tracking-[0.043px] line-clamp-2">
                 {stage.label}
               </p>
             </div>
@@ -309,13 +314,7 @@ function MassAndSacraments() {
   };
 
   return (
-    <div className="flex flex-col gap-[16px]">
-      {/* Quick links grid */}
-      <div className="flex flex-wrap gap-[8px]">
-        <QuickLinkCard img={imgMassSchedule} label="Mass" onClick={() => scrollTo(massRef)} />
-        <QuickLinkCard img={imgDailyRosary} label="Sacraments" onClick={() => scrollTo(sacramentsRef)} />
-      </div>
-
+    <div className="flex flex-col gap-[32px]">
       {/* Mass */}
       <div ref={massRef} className="flex flex-col gap-[16px]">
         <SectionHeader title="Mass" />
@@ -359,13 +358,13 @@ function OurArchdiocese() {
   };
 
   return (
-    <div className="flex flex-col gap-[16px]">
+    <div className="flex flex-col gap-[32px]">
       {/* Quick links grid */}
       <div className="flex flex-wrap gap-[8px]">
         <QuickLinkCard img={imgDailyReading} label="About us" onClick={() => scrollTo(aboutRef)} />
-        <QuickLinkCard img={imgVocations} label="Directory" onClick={() => scrollTo(directoryRef)} />
-        <QuickLinkCard img={imgYouthYoungAdults} label="Archbishop" onClick={() => scrollTo(archbishopRef)} />
-        <QuickLinkCard img={imgMarriageFamily} label="What's on" onClick={() => scrollTo(whatsOnRef)} />
+        <QuickLinkCard img={imgDailyReading} label="Directory" onClick={() => scrollTo(directoryRef)} />
+        <QuickLinkCard img={imgDailyReading} label="Archbishop" onClick={() => scrollTo(archbishopRef)} />
+        <QuickLinkCard img={imgDailyReading} label="What's on" onClick={() => scrollTo(whatsOnRef)} />
       </div>
 
       {/* About us */}
@@ -457,9 +456,9 @@ export default function ResourcesPage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#fffcf5]">
       {/* Header with background */}
-      <div className="relative h-[100px] w-full shrink-0">
+      <div className="relative h-[132px] w-full shrink-0">
         <img alt="" className="absolute inset-0 w-full h-full object-cover" src={resourcesBg} />
-        <div className="absolute bottom-0 left-0 flex items-center gap-[8px] px-[16px] pb-[16px]">
+        <div className="absolute bottom-0 left-0 flex items-center gap-[8px] px-[16px] pb-[32px]">
           <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] text-[24px] text-white tracking-[0.1105px]">
             Resources
           </p>

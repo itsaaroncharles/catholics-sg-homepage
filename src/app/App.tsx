@@ -539,67 +539,61 @@ export default function App() {
           <p className="font-['Fira_Sans:Bold',sans-serif] leading-[normal] text-[#041a52] text-[18px]">Latest Articles</p>
 
           <div className="flex gap-[16px] overflow-x-auto -mx-[16px] px-[16px] py-[4px] -my-[4px] touch-pan-x overscroll-x-contain" style={{ WebkitOverflowScrolling: 'touch' }}>
-            {/* News Card 1 */}
-            <div className="flex shrink-0 items-center">
-              <div className="bg-white h-[153px] w-[100px] overflow-clip rounded-bl-[16px] rounded-tl-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 relative">
+            {/* News Card 1 — one padded card, image inset (matches the
+                bulletin carousel's card anatomy) instead of a flush,
+                full-height photo glued to the text panel. */}
+            <div className="bg-white flex gap-[12px] h-[153px] items-center overflow-clip p-[12px] rounded-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0">
+              <div className="h-full w-[88px] shrink-0 overflow-clip rounded-[12px] relative">
                 <img alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none" src={newsImg1} />
               </div>
-              <div className="flex flex-row items-center self-stretch">
-                <div className="bg-white flex h-full items-start justify-center overflow-clip p-[12px] rounded-br-[16px] rounded-tr-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 w-[240px]">
-                  <div className="flex flex-[1_0_0] flex-col h-full items-start justify-between min-h-px min-w-px">
-                    <div className="flex flex-col gap-[8px] h-[96px] items-start w-full">
-                      <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] max-h-[38px] overflow-hidden text-[#43537b] text-[16px] text-ellipsis tracking-[0.1105px] w-full">
-                        St Joseph's silent witness held up as model for families at feast day Mass
-                      </p>
-                      <div className="flex flex-[1_0_0] flex-col font-['Fira_Sans:Regular',sans-serif] justify-center leading-[0] max-h-[66px] min-h-px min-w-px overflow-hidden text-[#041a52] text-[14px] text-ellipsis tracking-[0.043px] w-full">
-                        <p className="leading-[16px]">At Saint Joseph's Church (Victoria Street) feast day Mass on March 19, presider Cardinal William Goh described the church's patron saint as a model of faith, fatherhood, and fidelity to God's will.</p>
-                      </div>
-                    </div>
-                    <div className="flex gap-[8px] items-start">
-                      <div className="flex gap-[4px] items-center justify-center">
-                        <img alt="" className="shrink-0 size-[16px]" src={articleIcon} />
-                        <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">
-                          2mins read
-                        </p>
-                      </div>
-                      <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">•</p>
-                      <div className="flex flex-col font-['Fira_Sans:Regular',sans-serif] justify-center leading-[0] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px] whitespace-nowrap">
-                        <p className="leading-[16px]">1 Apr 26</p>
-                      </div>
-                    </div>
+              <div className="flex flex-col h-full items-start justify-between min-h-px w-[216px]">
+                <div className="flex flex-[1_0_0] flex-col gap-[8px] items-start min-h-px w-full">
+                  <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] max-h-[38px] overflow-hidden text-[#43537b] text-[16px] text-ellipsis tracking-[0.1105px] w-full">
+                    St Joseph's silent witness held up as model for families at feast day Mass
+                  </p>
+                  <div className="flex flex-col font-['Fira_Sans:Regular',sans-serif] h-[66px] justify-center leading-[0] max-h-[66px] overflow-hidden text-[#041a52] text-[14px] text-ellipsis tracking-[0.043px] w-full">
+                    <p className="leading-[16px]">At Saint Joseph's Church (Victoria Street) feast day Mass on March 19, presider Cardinal William Goh described the church's patron saint as a model of faith, fatherhood, and fidelity to God's will.</p>
+                  </div>
+                </div>
+                <div className="flex gap-[8px] items-start">
+                  <div className="flex gap-[4px] items-center justify-center">
+                    <img alt="" className="shrink-0 size-[16px]" src={articleIcon} />
+                    <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">
+                      2mins read
+                    </p>
+                  </div>
+                  <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">•</p>
+                  <div className="flex flex-col font-['Fira_Sans:Regular',sans-serif] justify-center leading-[0] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px] whitespace-nowrap">
+                    <p className="leading-[16px]">1 Apr 26</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* News Card 2 */}
-            <div className="flex shrink-0 items-center">
-              <div className="bg-white h-[153px] w-[100px] overflow-clip rounded-bl-[16px] rounded-tl-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 relative">
+            <div className="bg-white flex gap-[12px] h-[153px] items-center overflow-clip p-[12px] rounded-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0">
+              <div className="h-full w-[88px] shrink-0 overflow-clip rounded-[12px] relative">
                 <img alt="" className="absolute inset-0 w-full h-full object-cover pointer-events-none" src={newsImg2} />
               </div>
-              <div className="flex flex-row items-center self-stretch">
-                <div className="bg-white flex h-full items-start justify-center overflow-clip p-[12px] rounded-br-[16px] rounded-tr-[16px] shadow-[0px_4px_14px_0px_rgba(151,151,151,0.11)] shrink-0 w-[240px]">
-                  <div className="flex flex-[1_0_0] flex-col h-full items-start justify-between min-h-px min-w-px">
-                    <div className="flex flex-[1_0_0] flex-col gap-[8px] items-start min-h-px min-w-px w-full">
-                      <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] max-h-[38px] overflow-hidden text-[#43537b] text-[16px] text-ellipsis tracking-[0.1105px] w-full">
-                        Prayer, fasting, and almsgiving
-                      </p>
-                      <div className="flex flex-col font-['Fira_Sans:Regular',sans-serif] h-[66px] justify-center leading-[0] max-h-[66px] overflow-hidden text-[#041a52] text-[14px] text-ellipsis tracking-[0.043px] w-full">
-                        <p className="leading-[16px]">This season, CATHOLIC NEWS takes a look at what our parishes, schools, and church organisations did by way of the three pillars of Lent.</p>
-                      </div>
-                    </div>
-                    <div className="flex gap-[8px] items-start">
-                      <div className="flex gap-[4px] items-center justify-center">
-                        <img alt="" className="shrink-0 size-[16px]" src={articleIcon} />
-                        <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">
-                          2mins read
-                        </p>
-                      </div>
-                      <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">•</p>
-                      <div className="flex flex-col font-['Fira_Sans:Regular',sans-serif] justify-center leading-[0] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px] whitespace-nowrap">
-                        <p className="leading-[16px]">1 Apr 26</p>
-                      </div>
-                    </div>
+              <div className="flex flex-col h-full items-start justify-between min-h-px w-[216px]">
+                <div className="flex flex-[1_0_0] flex-col gap-[8px] items-start min-h-px w-full">
+                  <p className="font-['Fira_Sans_Condensed:Bold',sans-serif] leading-[normal] max-h-[38px] overflow-hidden text-[#43537b] text-[16px] text-ellipsis tracking-[0.1105px] w-full">
+                    Prayer, fasting, and almsgiving
+                  </p>
+                  <div className="flex flex-col font-['Fira_Sans:Regular',sans-serif] h-[66px] justify-center leading-[0] max-h-[66px] overflow-hidden text-[#041a52] text-[14px] text-ellipsis tracking-[0.043px] w-full">
+                    <p className="leading-[16px]">This season, CATHOLIC NEWS takes a look at what our parishes, schools, and church organisations did by way of the three pillars of Lent.</p>
+                  </div>
+                </div>
+                <div className="flex gap-[8px] items-start">
+                  <div className="flex gap-[4px] items-center justify-center">
+                    <img alt="" className="shrink-0 size-[16px]" src={articleIcon} />
+                    <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">
+                      2mins read
+                    </p>
+                  </div>
+                  <p className="font-['Fira_Sans:SemiBold',sans-serif] leading-[16px] text-[#041a52] text-[12px] whitespace-nowrap">•</p>
+                  <div className="flex flex-col font-['Fira_Sans:Regular',sans-serif] justify-center leading-[0] text-[12px] text-[rgba(4,26,82,0.57)] tracking-[0.043px] whitespace-nowrap">
+                    <p className="leading-[16px]">1 Apr 26</p>
                   </div>
                 </div>
               </div>

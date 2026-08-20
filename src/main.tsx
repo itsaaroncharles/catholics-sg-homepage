@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./app/App.tsx";
 import UxrDashboard from "./app/UxrDashboard.tsx";
@@ -10,7 +11,12 @@ if ('serviceWorker' in navigator) {
 }
 
 function Root() {
-  const route = window.location.hash.toLowerCase();
+  const [route, setRoute] = useState(window.location.hash.toLowerCase());
+  useEffect(() => {
+    const onHashChange = () => setRoute(window.location.hash.toLowerCase());
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, []);
   return route === '#uxr' || route.startsWith('#uxr/') ? <UxrDashboard /> : <App />;
 }
 

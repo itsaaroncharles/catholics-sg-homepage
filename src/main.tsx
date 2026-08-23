@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./app/App.tsx";
 import UxrDashboard from "./app/UxrDashboard.tsx";
+import ResearchStory from "./app/ResearchStory.tsx";
 import "./styles/index.css";
 
 if ('serviceWorker' in navigator) {
@@ -17,7 +18,10 @@ function Root() {
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
-  return route === '#uxr' || route.startsWith('#uxr/') ? <UxrDashboard /> : <App />;
+
+  if (route === '#research' || route.startsWith('#research/')) return <ResearchStory />;
+  if (route === '#uxr' || route.startsWith('#uxr/')) return <UxrDashboard />;
+  return <App />;
 }
 
 createRoot(document.getElementById("root")!).render(<Root />);
